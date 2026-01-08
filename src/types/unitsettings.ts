@@ -1,4 +1,4 @@
-import type { QuantityType, Unit } from '../plugins/types';
+import type { QuantityType, Unit } from '../plugins/unitConverter/types';
 
 export interface NumericTextFieldUnitSettings<T extends QuantityType> {
   type: T;
@@ -59,15 +59,16 @@ export const settingsPressure: NumericTextFieldUnitSettings<'pressure'> = {
   ],
 };
 
-export const settingsTemperature: NumericTextFieldUnitSettings<'temperature'> = {
-  type: 'temperature',
-  label: 'Temperature',
-  units: [
-    { unit: '°C', precision: 2 },
-    { unit: 'K', precision: 2 },
-    { unit: '°F', precision: 2 },
-  ],
-};
+export const settingsTemperature: NumericTextFieldUnitSettings<'temperature'> =
+  {
+    type: 'temperature',
+    label: 'Temperature',
+    units: [
+      { unit: '°C', precision: 2 },
+      { unit: 'K', precision: 2 },
+      { unit: '°F', precision: 2 },
+    ],
+  };
 
 export const settingsDensity: NumericTextFieldUnitSettings<'density'> = {
   type: 'density',

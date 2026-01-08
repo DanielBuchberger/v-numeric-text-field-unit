@@ -1,25 +1,36 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      insertTypesEntry: true,
+      include: ['src/**/*.ts', 'src/**/*.vue'],
+    }),
+  ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
-    }
+      '@': resolve(__dirname, './src'),
+    },
   },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'VNumericTextFieldUnit',
-      fileName: (format) => `index.${format === 'es' ? 'es' : 'js'}`
+      formats: ['es', 'cjs'],
+      fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'vuetify', '@vueuse/core', 'lodash'],
       output: {
-        globals: { vue: 'Vue' }
-      }
-    }
-  }
-})
+        globals: {
+          vue: 'Vue',
+          vuetify: 'Vuetify',
+        },
+      },
+    },
+  },
+});
