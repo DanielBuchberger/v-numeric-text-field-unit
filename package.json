@@ -1,6 +1,6 @@
 {
   "name": "@enrag/v-numeric-text-field-unit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Vue component for numeric text fields with unit conversion",
   "author": "Daniel Buchberger",
   "license": "MIT",
