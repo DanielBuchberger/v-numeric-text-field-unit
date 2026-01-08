@@ -1,10 +1,19 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs, watch } from 'vue';
+import {
+  VMenu,
+  VIcon,
+  VList,
+  VListItem,
+  VListItemTitle,
+} from 'vuetify/components';
 import type {
   NumericTextFieldUnitSettings,
   UnitSettings,
 } from '@/types/unitsettings';
+
 import type { QuantityType, Unit } from '@/plugins/unitConverter/types';
+import VNumericTextField from './VNumericTextField.vue';
 import type { Props } from './VNumericTextField.vue';
 import { useUnitConverter } from '@/plugins/unitConverter/useUnitConverter';
 
