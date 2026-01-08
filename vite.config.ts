@@ -24,7 +24,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['vue', 'vuetify', '@vueuse/core', 'lodash'],
+      external: ['vue', 'vuetify', 'lodash'],
       output: {
         globals: {
           vue: 'Vue',

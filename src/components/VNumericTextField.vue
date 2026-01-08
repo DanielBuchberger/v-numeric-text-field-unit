@@ -1,8 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { VTextField } from 'vuetify/lib/components/index.mjs';
-import { useEventListener } from '@vueuse/core';
 import { useUnitConverter } from '@/plugins/unitConverter/useUnitConverter';
 
 // defineOptions({
@@ -84,9 +83,19 @@ const decimalSelected = computed(() => selection.value.includes('.'));
 // const minusAtStartSelected = computed(() => containsMinusAtStart.value && selectionStart.value == 0 && selectionEnd.value > 0);
 const minusAfterESelected = computed(() => selectionStart.value <= minusAfterEIndex.value && selectionEnd.value > minusAfterEIndex.value);
 
-useEventListener(document, 'selectionchange', (event: Event) => {
+const updateSelection = () => {
   selectionStart.value = textfield.value?.selectionStart as number;
   selectionEnd.value = textfield.value?.selectionEnd as number;
+};
+
+onMounted(() => {
+  selectionStart.value = textfield.value?.selectionStart as number;
+  selectionEnd.value = textfield.value?.selectionEnd as number;
+  document.addEventListener('selectionchange', updateSelection);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('selectionchange', updateSelection);
 });
 
 const onKeyDown = (event: KeyboardEvent) => {
@@ -295,11 +304,6 @@ const validate = () => {
   textfield.value?.validate();
   return textfield.value?.isValid;
 };
-
-onMounted(() => {
-  selectionStart.value = textfield.value?.selectionStart as number;
-  selectionEnd.value = textfield.value?.selectionEnd as number;
-});
 
 watch(
   () => model.value,
