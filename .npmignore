@@ -1,0 +1,12 @@
+src/
+*.config.*
+.github/
+node_modules/
+.git/
+*.log
+*.md
+!README.md
+.gitignore
+.editorconfig
+.vscode/
+tsconfig*.json
