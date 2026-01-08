@@ -18,6 +18,7 @@ export interface UnitSettings<T extends QuantityType> {
 export const settingsLength: NumericTextFieldUnitSettings<'length'> = {
   type: 'length',
   label: 'Length',
+  baseUnit: 'm',
   units: [
     { unit: 'm', precision: 4 },
     { unit: 'dm', precision: 3 },
@@ -38,34 +39,37 @@ export const settingsMassFlow: NumericTextFieldUnitSettings<'massflow'> = {
 export const settingsVolumeFlow: NumericTextFieldUnitSettings<'volumeflow'> = {
   type: 'volumeflow',
   label: 'Volumeflow',
+  baseUnit: 'm³/s',
   units: [
-    { unit: 'm\u00B3/h', precision: 2 },
-    { unit: 'm\u00B3/s', precision: 2 },
+    { unit: 'm³/h', precision: 2 },
+    { unit: 'm³/s', precision: 2 },
   ],
 };
 export const settingsNormVolumeFlow: NumericTextFieldUnitSettings<'volumeflow'> =
   {
     type: 'volumeflow',
     label: 'Norm Volumeflow',
-    currentUnit: { unit: 'Nm\u00B3/h', precision: 2 },
-    baseUnit: 'Nm\u00B3/s',
+    currentUnit: { unit: 'Nm³/h', precision: 2 },
+    baseUnit: 'Nm³/s',
     units: [
-      { unit: 'Nm\u00B3/h', precision: 2 },
-      { unit: 'Nm\u00B3/s', precision: 2 },
+      { unit: 'Nm³/h', precision: 2 },
+      { unit: 'Nm³/s', precision: 2 },
     ],
   };
 export const settingsDensity: NumericTextFieldUnitSettings<'density'> = {
   type: 'density',
   label: 'Density',
+  baseUnit: 'kg/m³',
   units: [
-    { unit: 'kg/m\u00B3', precision: 2 },
-    { unit: 'g/m\u00B3', precision: 2 },
-    { unit: 'g/cm\u00B3', precision: 2 },
+    { unit: 'kg/m³', precision: 2 },
+    { unit: 'g/m³', precision: 2 },
+    { unit: 'g/cm³', precision: 2 },
   ],
 };
 export const settingsPressure: NumericTextFieldUnitSettings<'pressure'> = {
   type: 'pressure',
   label: 'Pressure',
+  baseUnit: 'Pa',
   units: [
     { unit: 'Pa', precision: 2 },
     { unit: 'kPa', precision: 2 },
@@ -79,16 +83,18 @@ export const settingsTemperature: NumericTextFieldUnitSettings<'temperature'> =
   {
     type: 'temperature',
     label: 'Temperature',
+    baseUnit: 'K',
     units: [
-      { unit: '\u00B0C', precision: 2 },
+      { unit: '°C', precision: 2 },
       { unit: 'K', precision: 2 },
-      { unit: '\u00B0F', precision: 2 },
+      { unit: '°F', precision: 2 },
     ],
   };
 export const settingsSpecificEntropy: NumericTextFieldUnitSettings<'specificEntropy'> =
   {
     type: 'specificEntropy',
     label: 'Specific Entropy',
+    baseUnit: 'J/kgK',
     units: [
       { unit: 'J/kgK', precision: 2 },
       { unit: 'kJ/kgK', precision: 2 },
@@ -98,12 +104,14 @@ export const settingsSpecificEntropy: NumericTextFieldUnitSettings<'specificEntr
 export const settingsTime: NumericTextFieldUnitSettings<'time'> = {
   type: 'time',
   label: 'Time',
+  baseUnit: 's',
   units: [{ unit: 's', precision: 0 }],
 };
 
 export const settingsEnergyFlow: NumericTextFieldUnitSettings<'energyFlow'> = {
   type: 'energyFlow',
   label: 'Energy Flow',
+  baseUnit: 'W',
   units: [
     { unit: 'W', precision: 0 },
     { unit: 'kW', precision: 0 },
@@ -114,6 +122,7 @@ export const settingsThermalConductivity: NumericTextFieldUnitSettings<'thermalC
   {
     type: 'thermalConductivity',
     label: 'Thermal Conductivity',
+    baseUnit: 'W/(m*K)',
     units: [
       { unit: 'W/(m*K)', precision: 0 },
       { unit: 'kW/(m*K)', precision: 0 },
@@ -123,6 +132,7 @@ export const settingsThermalConductivity: NumericTextFieldUnitSettings<'thermalC
 export const settingsArea: NumericTextFieldUnitSettings<'area'> = {
   type: 'area',
   label: 'Area',
+  baseUnit: 'm²',
   units: [
     { unit: 'mm²', precision: 0 },
     { unit: 'cm²', precision: 0 },
@@ -132,5 +142,6 @@ export const settingsArea: NumericTextFieldUnitSettings<'area'> = {
 export const settingsRatio: NumericTextFieldUnitSettings<'ratio'> = {
   type: 'ratio',
   label: 'Ratio',
+  baseUnit: '',
   units: [{ unit: '%', precision: 4 }],
 };
