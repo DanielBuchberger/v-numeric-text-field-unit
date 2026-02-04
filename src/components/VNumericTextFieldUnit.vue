@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from 'vue';
+import { computed, onMounted, ref, useAttrs, watch } from 'vue';
 import {
   VMenu,
   VIcon,
@@ -139,6 +139,25 @@ const attrsFiltered = computed(() => {
   return filtered;
 });
 
+const dialogElement = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  // Find parent dialog element
+  const parent = document.querySelector('[role="dialog"]');
+  if (parent) {
+    dialogElement.value = parent as HTMLElement;
+  }
+});
+
+const menuZIndex = computed(() => {
+  if (dialogElement.value) {
+    const dialogZ =
+      parseInt(getComputedStyle(dialogElement.value).zIndex) || 200;
+    return dialogZ + 1000; // Menu always 1000 higher than dialog
+  }
+  return 9999; // fallback
+});
+
 defineExpose({ numerictextfield });
 </script>
 
@@ -166,7 +185,7 @@ defineExpose({ numerictextfield });
         close-on-content-click
         location="bottom"
         transition="slide-y-transition"
-        attach="body"
+        :z-index="menuZIndex"
       >
         <template #activator="{ props }">
           <v-icon
