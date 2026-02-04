@@ -24,7 +24,7 @@ defineOptions({
 const model = defineModel<number>({ default: 0 });
 const settings = defineModel<NumericTextFieldUnitSettings<QuantityType>>(
   'settings',
-  { required: true }
+  { required: true },
 );
 
 const props = withDefaults(defineProps<Props>(), {
@@ -65,7 +65,7 @@ const attrs = useAttrs();
 const siUnit = computed(() => getSIUnit(settings.value.type));
 const baseUnit = computed(
   (): Unit<QuantityType> =>
-    settings.value.baseUnit ? settings.value.baseUnit : siUnit.value
+    settings.value.baseUnit ? settings.value.baseUnit : siUnit.value,
 );
 
 const minRule = (v: string) => {
@@ -75,7 +75,7 @@ const minRule = (v: string) => {
     settings.value.min,
     settings.value.type,
     baseUnit.value,
-    currentUnit.value
+    currentUnit.value,
   );
   return (
     float >= minConverted ||
@@ -90,7 +90,7 @@ const maxRule = (v: string) => {
     settings.value.max,
     settings.value.type,
     baseUnit.value,
-    currentUnit.value
+    currentUnit.value,
   );
   return (
     float <= maxConverted ||
@@ -113,7 +113,7 @@ const input = computed({
       model.value,
       settings.value.type,
       baseUnit.value,
-      currentUnit.value
+      currentUnit.value,
     );
   },
   set(newValue: number) {
@@ -121,7 +121,7 @@ const input = computed({
       newValue,
       settings.value.type,
       currentUnit.value,
-      baseUnit.value
+      baseUnit.value,
     );
   },
 });
@@ -131,7 +131,7 @@ watch(
   () => {
     validate();
   },
-  { deep: true }
+  { deep: true },
 );
 
 const attrsFiltered = computed(() => {
@@ -166,6 +166,7 @@ defineExpose({ numerictextfield });
         close-on-content-click
         location="bottom"
         transition="slide-y-transition"
+        attach="body"
       >
         <template #activator="{ props }">
           <v-icon
