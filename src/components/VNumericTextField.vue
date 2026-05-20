@@ -1,7 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
-import { VTextField } from 'vuetify/lib/components/index.mjs';
+import { VTextField } from 'vuetify/components';
 import { useUnitConverter } from '@/plugins/unitConverter/useUnitConverter';
 
 // defineOptions({
@@ -155,7 +155,7 @@ const handleNumber = (event: KeyboardEvent) => {
   }
 };
 
-const handleEscape = (event: KeyboardEvent) => {
+const handleEscape = (_event: KeyboardEvent) => {
   // reset value to model value and unfocus
   input.value = numberToString(model.value);
 
