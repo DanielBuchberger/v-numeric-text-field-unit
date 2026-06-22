@@ -52,9 +52,7 @@ const currentUnitSettings = computed({
     settings.value.currentUnit = newValue;
   },
 });
-const currentUnit = computed(() =>
-  props.hideUnit ? undefined : currentUnitSettings.value.unit,
-);
+const currentUnit = computed(() => currentUnitSettings.value.unit);
 const currentPrecision = computed(() => currentUnitSettings.value.precision);
 
 const changeUnit = (unit: UnitSettings<QuantityType>) => {
@@ -179,7 +177,7 @@ defineExpose({ numerictextfield });
     :min-expo="props.minExpo"
     :precision="currentPrecision"
     :rules="rules"
-    :suffix="currentUnit"
+    :suffix="props.hideUnit ? undefined : currentUnit"
     v-bind="attrsFiltered"
   >
     <!-- have to skip ts checks -->
@@ -187,7 +185,7 @@ defineExpose({ numerictextfield });
     <template v-for="(slot, name) in $slots" #[name]="slot">
       <slot :name="name" v-bind="slot"></slot>
     </template>
-    <template v-if="settings.units.length > 1 || !props.hideUnit" #append>
+    <template v-if="settings.units.length > 1 && !props.hideUnit" #append>
       <v-menu
         close-on-content-click
         location="bottom"
