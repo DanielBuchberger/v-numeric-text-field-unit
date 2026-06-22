@@ -14,7 +14,7 @@ import type {
 
 import type { QuantityType, Unit } from '@/plugins/unitConverter/types';
 import VNumericTextField from './VNumericTextField.vue';
-import type { Props } from './VNumericTextField.vue';
+import type { Props as PropsNumeric } from './VNumericTextField.vue';
 import { useUnitConverter } from '@/plugins/unitConverter/useUnitConverter';
 
 defineOptions({
@@ -27,10 +27,15 @@ const settings = defineModel<NumericTextFieldUnitSettings<QuantityType>>(
   { required: true },
 );
 
+export interface Props extends PropsNumeric {
+  hideUnit?: boolean;
+}
+
 const props = withDefaults(defineProps<Props>(), {
   minExpo: -3,
   maxExpo: 5,
   hover: true,
+  hideUnit: false,
 });
 
 const { convert, getSIUnit } = useUnitConverter();
@@ -172,7 +177,7 @@ defineExpose({ numerictextfield });
     :min-expo="props.minExpo"
     :precision="currentPrecision"
     :rules="rules"
-    :suffix="currentUnit"
+    :suffix="props.hideUnit ? undefined : currentUnit"
     v-bind="attrsFiltered"
   >
     <!-- have to skip ts checks -->
@@ -180,7 +185,7 @@ defineExpose({ numerictextfield });
     <template v-for="(slot, name) in $slots" #[name]="slot">
       <slot :name="name" v-bind="slot"></slot>
     </template>
-    <template v-if="settings.units.length > 1" #append>
+    <template v-if="settings.units.length > 1 && !props.hideUnit" #append>
       <v-menu
         close-on-content-click
         location="bottom"
