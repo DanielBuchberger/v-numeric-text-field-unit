@@ -4,6 +4,13 @@ on:
   release:
     types: [published]
 
+# Trusted publishing (OIDC): npm accepts this workflow as publisher of the package (configured on npmjs.com, stage
+# publish only), no NPM_TOKEN; provenance is attached automatically. The workflow stages the version, a maintainer
+# releases it on npmjs.com or with `npm stage approve <stage-id>` (2FA).
+permissions:
+  id-token: write   # OIDC token for npm
+  contents: write   # push of the version commit to release/v<version> (only if package.json did not have it)
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,8 +37,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm
+        # trusted publishing needs npm >= 11.5.1, staged publishing npm >= 11.15.0
+        run: npm install -g npm@^11.15.0 && npm --version
 
       - name: Create release branch
         run: |
@@ -41,6 +52,8 @@ jobs:
         run: npm ci && npm run build
 
       - name: Patch version
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           git config --global user.name ${GITHUB_ACTOR}
           git config --global user.email "github-actions@github.com"
@@ -56,7 +69,6 @@ jobs:
             git push publisher HEAD:release/v${{env.RELEASE_VERSION}}
           fi
 
-      - name: Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Stage publish
+        # authenticated by trusted publishing (OIDC), no token; the staged version goes live after approval
+        run: npm stage publish .
