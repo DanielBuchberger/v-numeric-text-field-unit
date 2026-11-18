@@ -19,6 +19,9 @@ export type LengthUnit = (typeof LENGTHUNITS)[number];
 export const MOLARENERGYUNITS = ['J/mol', 'J/kmol', 'kJ/mol', 'kJ/kmol', 'MJ/mol', 'MJ/kmol'] as const;
 export type MolarEnergyUnit = (typeof MOLARENERGYUNITS)[number];
 
+export const MOLARENTROPYUNITS = ['J/molK', 'J/kmolK', 'kJ/molK', 'kJ/kmolK'] as const;
+export type MolarEntropyUnit = (typeof MOLARENTROPYUNITS)[number];
+
 export const MOLARMASSUNITS = ['kg/mol', 'g/mol', 'kg/kmol'] as const;
 export type MolarMassUnit = (typeof MOLARMASSUNITS)[number];
 

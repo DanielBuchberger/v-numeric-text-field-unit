@@ -14,6 +14,7 @@ import type {
   MolarVolumeUnit,
   VolumetricEnergyUnit,
   MolarEnergyUnit,
+  MolarEntropyUnit,
   StandardDensityUnit,
   MassflowUnit,
   SwellIndexUnit,
@@ -33,6 +34,7 @@ export type QuantityType =
   | 'kinematicViscosity'
   | 'length'
   | 'molarEnergy'
+  | 'molarEntropy'
   | 'molarMass'
   | 'molarVolume'
   | 'pressure'
@@ -67,6 +69,8 @@ export type Unit<T extends QuantityType> = T extends 'thermalConductivity'
                   ? LengthUnit
                   : T extends 'molarEnergy'
                     ? MolarEnergyUnit
+                    : T extends 'molarEntropy'
+                    ? MolarEntropyUnit
                     : T extends 'molarMass'
                       ? MolarMassUnit
                       : T extends 'molarVolume'

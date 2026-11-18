@@ -4,6 +4,7 @@ import pressureConverter from './pressure';
 import densityConverter from './density';
 import lengthConverter from './length';
 import molarEnergyConverter from './molarEnergy';
+import molarEntropyConverter from './molarEntropy';
 import molarMassConverter from './molarMass';
 import molarVolumeConverter from './molarVolume';
 import ratioConverter from './ratio';
@@ -26,6 +27,7 @@ const converters: Converter<QuantityType>[] = [
   densityConverter,
   lengthConverter,
   molarEnergyConverter,
+  molarEntropyConverter,
   molarMassConverter,
   molarVolumeConverter,
   ratioConverter,
